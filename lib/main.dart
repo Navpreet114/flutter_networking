@@ -56,8 +56,26 @@ class NetworkData extends StatelessWidget {
             itemBuilder: (context, index) {
               var post = posts[index];
               var postContent = post['attributes']['contentHtml'];
+              var regex = RegExp('<p>|</p>|<br>');
+              dynamic cleanedPost = postContent?.replaceAll(regex, '');
+
               return ListTile(
-                title: Text('${postContent}'),
+                title: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(23),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '$cleanedPost',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 27,
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
           );
